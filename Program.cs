@@ -4,6 +4,7 @@
     {
         public static void Main(string[] args)
         {
+            Console.WriteLine("Welcome to Address Book Program");
             bool choice = true;
             AddressBook Adr = new AddressBook();
             details();
@@ -79,6 +80,7 @@
                 string EmailId = Console.ReadLine();
                 Adr.createUser(FirstName, LastName, Address, City, State, ZipCode, PhoneNum, EmailId);
             }
+            Adr.countperson();
         }
     }
 }

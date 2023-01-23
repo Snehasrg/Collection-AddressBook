@@ -196,5 +196,9 @@
                     }
             }
         }
+        public void countperson()
+        {
+            Console.WriteLine("\nHere are the current {0} contacts in your address book:\n", People.Count);
+        }
     }
 }
