@@ -17,7 +17,9 @@
                 Console.WriteLine("#3 Delete existing user");
                 Console.WriteLine("#4 Show all users in adressBook");
                 Console.WriteLine("#5 Search by using city or state");
-                Console.WriteLine("#6 Exit");
+                Console.WriteLine("#6 Count by using city or state");
+
+                Console.WriteLine("#7 Exit");
             }
             while (choice)
             {
@@ -44,6 +46,9 @@
                         Adr.searchperson();
                         break;
                     case 6:
+                        Adr.countperson();
+                        break;
+                    case 7:
                         choice = false;
                         break;
                     default:
@@ -80,7 +85,6 @@
                 string EmailId = Console.ReadLine();
                 Adr.createUser(FirstName, LastName, Address, City, State, ZipCode, PhoneNum, EmailId);
             }
-            Adr.countperson();
         }
     }
 }

@@ -2,6 +2,7 @@
 {
     public interface IAddressBookSystem
     {
+
         //  void createUser();
         void printUser();
         void editContact();
@@ -10,6 +11,7 @@
     public class AddressBook : IAddressBookSystem
     {
         public static List<Person> People = new List<Person>();
+
         public void createUser(string FirstName, string LastName, string Address, string City, string State, string ZipCode, string PhoneNum, string EmailId)
         {
             Person person = new Person(FirstName, LastName, Address, City, State, ZipCode, PhoneNum, EmailId);
@@ -36,14 +38,16 @@
         }
         public void printUser()
         {
-            if (People.Count == 0)
+            List<Person> SortedList = People.OrderBy(o => o.FirstName).ToList();
+            if (SortedList.Count == 0)
             {
                 Console.WriteLine("Your address book is empty.");
                 Console.ReadKey();
                 return;
             }
             Console.WriteLine("\nHere are the current {0} people in your address book:\n", People.Count);
-            foreach (var person in People)
+            Console.WriteLine("*****list sorted by firstname.*****");
+            foreach (var person in SortedList)
             {
                 Console.WriteLine(" FirstName: {0},\n LastName: {1},\n Adress: {2},\n City : {3},\n State: {4},\n Zip: {5},\n PhoneNum: {6},\n Email: {7}", person.FirstName, person.LastName, person.Address, person.City, person.State, person.ZipCode, person.PhoneNum, person.EmailId);
                 Console.WriteLine("________________________________");
@@ -198,7 +202,40 @@
         }
         public void countperson()
         {
-            Console.WriteLine("\nHere are the current {0} contacts in your address book:\n", People.Count);
+            Console.WriteLine("how you would like to count.");
+            Console.WriteLine("#1: using state\n #2: using city");
+            string inp = Console.ReadLine();
+            switch (inp)
+            {
+                case "1":
+                    {
+                        int count = 0;
+                        foreach (var i in People)
+                        {
+                            if (i.City != null)
+                            {
+                                count++;
+                            }
+
+                        }
+                        Console.WriteLine("\nHere are the current {0} contacts in your address book:\n", count);
+                        break;
+                    }
+                case "2":
+                    {
+                        int count = 0;
+                        foreach (var i in People)
+                        {
+                            if (i.State != null)
+                            {
+                                count++;
+                            }
+
+                        }
+                        Console.WriteLine("\nHere are the current {0} contacts in your address book:\n", count);
+                        break;
+                    }
+            }
         }
     }
 }

@@ -28,6 +28,6 @@ namespace CollectionAddressBook
             this.PhoneNum = PhoneNum;
             this.EmailId = EmailId;
         }
-
     }
+
 }
