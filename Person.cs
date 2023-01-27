@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace CollectionAddressBook
+﻿namespace  CollectionAddressBook
 {
+    [Serializable]
     public class Person
     {
         public string FirstName;
@@ -28,6 +23,6 @@ namespace CollectionAddressBook
             this.PhoneNum = PhoneNum;
             this.EmailId = EmailId;
         }
-    }
 
+    }
 }

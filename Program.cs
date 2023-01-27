@@ -1,4 +1,6 @@
-﻿namespace CollectionAddressBook
+﻿using CollectionAddressBook;
+
+namespace CollectionAddressBook
 {
     public class Program
     {
@@ -19,7 +21,8 @@
                 Console.WriteLine("#5 Search by using city or state");
                 Console.WriteLine("#6 Count by using city or state");
                 Console.WriteLine("#7 Count by FirstName / city / state/Zip");
-                Console.WriteLine("#8 Exit");
+                Console.WriteLine("#8 Writing and reading Stream IO");
+                Console.WriteLine("#9 Exit");
             }
             while (choice)
             {
@@ -52,6 +55,10 @@
                         Adr.sorting();
                         break;
                     case 8:
+
+                        Adr.WritingAndReadingStream();
+                        break;
+                    case 9:
                         choice = false;
                         break;
                     default:
