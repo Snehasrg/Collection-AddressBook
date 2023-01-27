@@ -1,9 +1,10 @@
 ﻿using CollectionAddressBook;
-using System.Reflection.Metadata;
+using System.Formats.Asn1;
+using System.Globalization;
 
 namespace CollectionAddressBook
 {
-    public interface ICollectionAddressBook
+    public interface ICollectionAddress
     {
         //  void createUser();
         void printUser();
@@ -11,7 +12,8 @@ namespace CollectionAddressBook
         void deleteContact();
     }
 
-    public class AddressBook : ICollectionAddressBook
+    public class AddressBook : ICollectionAddress
+    
     {
         public static List<Person> People = new List<Person>();
 
@@ -305,7 +307,7 @@ namespace CollectionAddressBook
         }
         public void WritingAndReadingStream()
         {
-            string path = @"D:\240\Day23CollectionAddressBook\CollectionAddressBook\New Text Document.txt";
+            string path = @"C:\Users\Hp\Desktop\240\AddressBookSystem\AddressBookSystem\written.txt";
             using (StreamWriter sr = File.AppendText(path))
             {
                 foreach (var person in People)
@@ -317,6 +319,54 @@ namespace CollectionAddressBook
                 Console.WriteLine(File.ReadAllText(path));
             }
             Console.ReadKey();
+        }
+        public void WritingtoCSV()
+        {
+            string importFilePath = @"C:\Users\Hp\Desktop\240\AddressBookSystem\AddressBookSystem\csvData.csv";
+            {
+                using (var writer = new StreamWriter(importFilePath))
+                using (var csvExport = new CsvWriter(writer, CultureInfo.InvariantCulture))
+                {
+                    foreach (var person in People)
+                    {
+                        csvExport.WriteField(" FirstName " + person.FirstName);
+                        csvExport.WriteField("LastName " + person.LastName);
+                        csvExport.WriteField("Address  " + person.Address);
+                        csvExport.WriteField("City " + person.City);
+                        csvExport.WriteField("State " + person.State);
+                        csvExport.WriteField("ZipCode " + person.ZipCode);
+                        csvExport.WriteField("PhoneNum " + person.PhoneNum);
+                        csvExport.WriteField("EmailId " + person.EmailId);
+                        Console.WriteLine("added Data in Csv file ");
+                        Console.WriteLine(" FirstName: {0},\n LastName: {1},\n Adress: {2},\n City : {3},\n State: {4},\n Zip: {5},\n PhoneNum: {6},\n Email: {7}", person.FirstName, person.LastName, person.Address, person.City, person.State, person.ZipCode, person.PhoneNum, person.EmailId);
+                        Console.WriteLine("----------------------------------------------------------");
+                    }
+                }
+            }
+
+        }
+        public void ReadingCSV()
+        {
+            string FilePath = @"C:\Users\Hp\Desktop\240\AddressBookSystem\AddressBookSystem\csvData.csv";
+            using (var reader = new StreamReader(FilePath))
+            using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
+            {
+
+                var records = csv.GetRecords<Person>().ToList();
+                foreach (var person in records)
+                {
+                    Console.WriteLine(person.FirstName);
+                    Console.WriteLine(person.LastName);
+                    Console.WriteLine(person.Address);
+                    Console.WriteLine(person.City);
+                    Console.WriteLine(person.State);
+                    Console.WriteLine(person.ZipCode);
+                    Console.WriteLine(person.PhoneNum);
+                    Console.WriteLine(person.EmailId);
+                    Console.WriteLine("-----------------------------------");
+                }
+            }
+
         }
 
     }

@@ -1,4 +1,4 @@
-﻿namespace  CollectionAddressBook
+﻿namespace CollectionAddressBook
 {
     [Serializable]
     public class Person
@@ -25,4 +25,5 @@
         }
 
     }
+
 }
