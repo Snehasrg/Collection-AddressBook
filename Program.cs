@@ -1,6 +1,4 @@
-﻿using CollectionAddressBook;
-
-namespace CollectionAddressBook
+﻿namespace CollectionAddressBook
 {
     public class Program
     {
@@ -60,7 +58,9 @@ namespace CollectionAddressBook
                         Adr.WritingAndReadingStream();
                         break;
                     case 9:
-                        Adr.WritingtoCSV();
+                        //  Adr.WritingtoCSV();
+                        Adr.usingJson();
+                        // Adr.jsonread();
                         break;
                     case 10:
                         choice = false;

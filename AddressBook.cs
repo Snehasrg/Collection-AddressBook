@@ -1,10 +1,11 @@
 ﻿using CollectionAddressBook;
 using System.Formats.Asn1;
 using System.Globalization;
+using System.Text.Json;
 
 namespace CollectionAddressBook
 {
-    public interface ICollectionAddress
+    public interface ICollectionAddressBook
     {
         //  void createUser();
         void printUser();
@@ -12,8 +13,7 @@ namespace CollectionAddressBook
         void deleteContact();
     }
 
-    public class AddressBook : ICollectionAddress
-    
+    public class AddressBook : ICollectionAddressBook
     {
         public static List<Person> People = new List<Person>();
 
@@ -364,6 +364,31 @@ namespace CollectionAddressBook
                     Console.WriteLine(person.PhoneNum);
                     Console.WriteLine(person.EmailId);
                     Console.WriteLine("-----------------------------------");
+                }
+            }
+
+        }
+        public void usingJson()
+        {
+            string jsonFilePath = "C:\\Users\\Hp\\Desktop\\240\\AddressBookSystem\\AddressBookSystem\\CSVtoJsonFile.json";
+            JsonSerializer serializer = new JsonSerializer();
+            using (StreamWriter sw = new StreamWriter(jsonFilePath))
+            using (JsonWriter writer = new JsonTextWriter(sw))
+            {
+                serializer.Serialize(writer, People);
+                Console.WriteLine("added Data in Json file ");
+            }
+        }
+        public void jsonread()
+        {
+            string jsonFilePath = File.ReadAllText("C:\\Users\\Hp\\Desktop\\240\\AddressBookSystem\\AddressBookSystem\\CSVtoJsonFile.json");
+            using (StreamReader r = new StreamReader(jsonFilePath))
+            {
+                string json = r.ReadToEnd();
+                List<Person> items = JsonConvert.DeserializeObject<List<Person>>(json);
+                foreach (var person in items)
+                {
+                    Console.WriteLine(" FirstName: {0},\n LastName: {1},\n Adress: {2},\n City : {3},\n State: {4},\n Zip: {5},\n PhoneNum: {6},\n Email: {7}", person.FirstName, person.LastName, person.Address, person.City, person.State, person.ZipCode, person.PhoneNum, person.EmailId);
                 }
             }
 
